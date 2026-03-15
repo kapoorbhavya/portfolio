@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiPlay } from 'react-icons/fi';
 
@@ -43,22 +43,9 @@ const filters = ['All', 'AI / ML', 'Computer Vision', 'Full Stack'];
 export default function Projects() {
     const [active, setActive] = useState('All');
     const [activeVideo, setActiveVideo] = useState(null);
-    const videoRef = useRef(null);
 
     const filtered = active === 'All' ? projects : projects.filter(p => p.category === active);
     const closeVideo = () => setActiveVideo(null);
-
-    // Try to autoplay when a video is opened in the modal
-    useEffect(() => {
-        if (!activeVideo || !videoRef.current) return;
-        const v = videoRef.current;
-        const playPromise = v.play();
-        if (playPromise && typeof playPromise.then === 'function') {
-            playPromise.catch(() => {
-                // Autoplay was blocked; leave controls so user can press play
-            });
-        }
-    }, [activeVideo]);
 
     return (
         <div className="bg-white">
@@ -120,41 +107,27 @@ export default function Projects() {
                                     className="editorial-card overflow-hidden flex flex-col group"
                                 >
                                     {/* ── Banner / Video area ── */}
-                                    {p.videoUrl ? (
+                                    {p.thumbnail ? (
                                         <button
                                             type="button"
-                                            onClick={() => setActiveVideo(p.videoUrl)}
-                                            className="relative w-full text-left focus:outline-none group/video"
+                                            onClick={() => p.videoUrl && setActiveVideo(p.videoUrl)}
+                                            className="relative w-full overflow-hidden text-left focus:outline-none group/video"
+                                            style={{ aspectRatio: '16 / 9' }}
                                             data-cursor="hover"
                                         >
-                                            <div className="relative w-full bg-[#050505] overflow-hidden">
-                                                <div className="w-full" style={{ aspectRatio: '16 / 9' }}>
-                                                    <video
-                                                        src={p.videoUrl}
-                                                        className="w-full h-full object-cover opacity-70 group-hover/video:opacity-100 transition-opacity duration-200"
-                                                        muted
-                                                        playsInline
-                                                        loop
-                                                    />
-                                                </div>
-                                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/35 group-hover/video:bg-black/55 transition-colors duration-200">
-                                                    <FiPlay size={22} className="text-white" />
-                                                    <span className="label-sm text-[10px] tracking-[0.18em] text-white">Watch Demo</span>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    ) : p.thumbnail ? (
-                                        /* Actual project screenshot thumbnail */
-                                        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
                                             <img
                                                 src={p.thumbnail}
                                                 alt={p.title}
-                                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                                                className="w-full h-full object-cover object-top group-hover/video:scale-105 transition-transform duration-500"
                                             />
+                                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/30 group-hover/video:bg-black/45 transition-colors duration-200">
+                                                <FiPlay size={22} className="text-white" />
+                                                <span className="label-sm text-[10px] tracking-[0.18em] text-white">Watch Demo</span>
+                                            </div>
                                             <span className="absolute top-3 right-3 label-sm text-[9px] bg-white text-[#0a0a0a] px-3 py-1">
                                                 Featured
                                             </span>
-                                        </div>
+                                        </button>
                                     ) : (
                                         /* Minimal dark banner matching site's black accent */
                                         <div
@@ -277,11 +250,9 @@ export default function Projects() {
                                 <div className="bg-black">
                                     <div className="relative w-full" style={{ aspectRatio: '16 / 9' }}>
                                         <video
-                                            ref={videoRef}
                                             src={activeVideo}
                                             controls
-                                            autoPlay
-                                            muted
+                                            poster={projects.find(p => p.videoUrl === activeVideo)?.thumbnail}
                                             className="w-full h-full"
                                         />
                                     </div>
