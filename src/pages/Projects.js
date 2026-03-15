@@ -10,7 +10,7 @@ const projects = [
         tags: ['Python', 'HuggingFace', 'PyTorch', 'TensorFlow', 'Model Quantization'],
         github: 'https://github.com/kapoorbhavya/NMT_Public_Notice_Engllish_To_Hindi_Translator',
         liveUrl: '/video/nmt.mp4',
-        
+        videoUrl: '/video/nmt.mp4',
         thumbnail: 'images/nmt-thumbnail.png',
         period: 'Oct – Nov 2025', category: 'AI / ML',
     },
@@ -21,7 +21,7 @@ const projects = [
         tags: ['Python', 'OpenCV', 'Scikit-learn', 'Random Forest', 'Isolation Forest'],
         github: 'https://github.com/kapoorbhavya/Printing_defect_detection_Project',
         liveUrl: '/video/pd.mp4',
-        
+        videoUrl: '/video/pd.mp4',
         thumbnail: 'images/print_defect.png',
         period: 'Oct – Nov 2025', category: 'Computer Vision',
     },
@@ -32,7 +32,7 @@ const projects = [
         tags: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'GenAI'],
         github: 'https://github.com/kapoorbhavya/Alumni_Connection_Platform',
         liveUrl: '/video/alumni_connection_record.mp4',
-        
+        videoUrl: '/video/alumni_connection_record.mp4',
         thumbnail: 'images/Alumni_connection-thumbnail.png',
         period: 'Jun – Aug 2025', category: 'Full Stack',
     },
