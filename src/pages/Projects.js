@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiGithub, FiExternalLink, FiPlay } from 'react-icons/fi';
 
@@ -43,9 +43,22 @@ const filters = ['All', 'AI / ML', 'Computer Vision', 'Full Stack'];
 export default function Projects() {
     const [active, setActive] = useState('All');
     const [activeVideo, setActiveVideo] = useState(null);
+    const videoRef = useRef(null);
 
     const filtered = active === 'All' ? projects : projects.filter(p => p.category === active);
     const closeVideo = () => setActiveVideo(null);
+
+    // Try to autoplay when a video is opened in the modal
+    useEffect(() => {
+        if (!activeVideo || !videoRef.current) return;
+        const v = videoRef.current;
+        const playPromise = v.play();
+        if (playPromise && typeof playPromise.then === 'function') {
+            playPromise.catch(() => {
+                // Autoplay was blocked; leave controls so user can press play
+            });
+        }
+    }, [activeVideo]);
 
     return (
         <div className="bg-white">
@@ -264,6 +277,7 @@ export default function Projects() {
                                 <div className="bg-black">
                                     <div className="relative w-full" style={{ aspectRatio: '16 / 9' }}>
                                         <video
+                                            ref={videoRef}
                                             src={activeVideo}
                                             controls
                                             autoPlay
