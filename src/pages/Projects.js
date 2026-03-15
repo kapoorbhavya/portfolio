@@ -179,25 +179,13 @@ export default function Projects() {
 
                                         {/* Action buttons — site's btn-solid / btn-outline */}
                                         <div className="pt-1 flex gap-3">
-                                            {p.videoUrl ? (
-                                                <button
-                                                    type="button"
-                                                    onClick={() => setActiveVideo(p.videoUrl)}
-                                                    className="btn-solid text-[10px] flex-1 justify-center"
-                                                    data-cursor="hover"
-                                                >
-                                                    <FiPlay size={12} /> Live Demo
-                                                </button>
-                                            ) : (
-                                                <a
-                                                    href={p.liveUrl || p.github}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                    className="btn-solid text-[10px] flex-1 justify-center"
-                                                >
-                                                    <FiExternalLink size={12} /> Live Demo
-                                                </a>
-                                            )}
+                                            <a
+                                                href={p.liveUrl || p.github}
+                                                className="btn-solid text-[10px] flex-1 justify-center"
+                                                download
+                                            >
+                                                <FiExternalLink size={12} /> Live Demo
+                                            </a>
                                             <a
                                                 href={p.github}
                                                 target="_blank"
