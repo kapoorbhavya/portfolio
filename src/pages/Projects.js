@@ -252,6 +252,8 @@ export default function Projects() {
                                         <video
                                             src={activeVideo}
                                             controls
+                                            autoPlay
+                                            muted
                                             poster={projects.find(p => p.videoUrl === activeVideo)?.thumbnail}
                                             className="w-full h-full"
                                         />
