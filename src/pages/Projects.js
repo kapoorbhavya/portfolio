@@ -263,7 +263,13 @@ export default function Projects() {
                                 </div>
                                 <div className="bg-black">
                                     <div className="relative w-full" style={{ aspectRatio: '16 / 9' }}>
-                                        <video src={activeVideo} controls className="w-full h-full" />
+                                        <video
+                                            src={activeVideo}
+                                            controls
+                                            autoPlay
+                                            muted
+                                            className="w-full h-full"
+                                        />
                                     </div>
                                 </div>
                             </motion.div>
