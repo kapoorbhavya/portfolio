@@ -1,0 +1,6 @@
+{
+  "buildCommand": "git lfs install && git lfs pull && npm run build",
+  "env": {
+    "GIT_LFS_SKIP_SMUDGE": "0"
+  }
+}
