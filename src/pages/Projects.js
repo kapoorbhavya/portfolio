@@ -9,8 +9,8 @@ const projects = [
         description: 'English-to-Hindi NMT model targeting public legal notices using HuggingFace Transformers and PyTorch. Applied model quantization for edge deployment, improving latency and resource efficiency.',
         tags: ['Python', 'HuggingFace', 'PyTorch', 'TensorFlow', 'Model Quantization'],
         github: 'https://github.com/kapoorbhavya/NMT_Public_Notice_Engllish_To_Hindi_Translator',
-        liveUrl: '/video/nmt.mp4',
-        videoUrl: '/video/nmt.mp4',
+        liveUrl: 'https://github.com/kapoorbhavya/portfolio/raw/main/public/video/Screen%20Recording%202026-03-14%20145340.mp4',
+        
         thumbnail: 'images/nmt-thumbnail.png',
         period: 'Oct – Nov 2025', category: 'AI / ML',
     },
@@ -20,8 +20,7 @@ const projects = [
         description: 'Intelligent defect detection for offset printing quality control. Random Forest for classification and Isolation Forest for unsupervised anomaly detection, with heatmap visualization.',
         tags: ['Python', 'OpenCV', 'Scikit-learn', 'Random Forest', 'Isolation Forest'],
         github: 'https://github.com/kapoorbhavya/Printing_defect_detection_Project',
-        liveUrl: '/video/pd.mp4',
-        videoUrl: '/video/pd.mp4',
+        liveUrl: 'https://github.com/kapoorbhavya/portfolio/raw/main/public/video/Screen%20Recording%202026-03-14%20161251.mp4',
         thumbnail: 'images/print_defect.png',
         period: 'Oct – Nov 2025', category: 'Computer Vision',
     },
@@ -31,8 +30,7 @@ const projects = [
         description: 'Full-stack MERN platform connecting students with alumni for mentorship and career guidance. JWT role-based auth across Admin, Alumni, and Student roles. GenAI-powered event recommendations.',
         tags: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'GenAI'],
         github: 'https://github.com/kapoorbhavya/Alumni_Connection_Platform',
-        liveUrl: '/video/alumni_connection_record.mp4',
-        videoUrl: '/video/alumni_connection_record.mp4',
+        liveUrl: 'https://github.com/kapoorbhavya/portfolio/raw/main/public/video/alumni_connection_record.mp4',
         thumbnail: 'images/Alumni_connection-thumbnail.png',
         period: 'Jun – Aug 2025', category: 'Full Stack',
     },
@@ -107,27 +105,41 @@ export default function Projects() {
                                     className="editorial-card overflow-hidden flex flex-col group"
                                 >
                                     {/* ── Banner / Video area ── */}
-                                    {p.thumbnail ? (
+                                    {p.videoUrl ? (
                                         <button
                                             type="button"
-                                            onClick={() => p.videoUrl && setActiveVideo(p.videoUrl)}
-                                            className="relative w-full overflow-hidden text-left focus:outline-none group/video"
-                                            style={{ aspectRatio: '16 / 9' }}
+                                            onClick={() => setActiveVideo(p.videoUrl)}
+                                            className="relative w-full text-left focus:outline-none group/video"
                                             data-cursor="hover"
                                         >
+                                            <div className="relative w-full bg-[#050505] overflow-hidden">
+                                                <div className="w-full" style={{ aspectRatio: '16 / 9' }}>
+                                                    <video
+                                                        src={p.videoUrl}
+                                                        className="w-full h-full object-cover opacity-70 group-hover/video:opacity-100 transition-opacity duration-200"
+                                                        muted
+                                                        playsInline
+                                                        loop
+                                                    />
+                                                </div>
+                                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/35 group-hover/video:bg-black/55 transition-colors duration-200">
+                                                    <FiPlay size={22} className="text-white" />
+                                                    <span className="label-sm text-[10px] tracking-[0.18em] text-white">Watch Demo</span>
+                                                </div>
+                                            </div>
+                                        </button>
+                                    ) : p.thumbnail ? (
+                                        /* Actual project screenshot thumbnail */
+                                        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '16 / 9' }}>
                                             <img
                                                 src={p.thumbnail}
                                                 alt={p.title}
-                                                className="w-full h-full object-cover object-top group-hover/video:scale-105 transition-transform duration-500"
+                                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                                             />
-                                            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/30 group-hover/video:bg-black/45 transition-colors duration-200">
-                                                <FiPlay size={22} className="text-white" />
-                                                <span className="label-sm text-[10px] tracking-[0.18em] text-white">Watch Demo</span>
-                                            </div>
                                             <span className="absolute top-3 right-3 label-sm text-[9px] bg-white text-[#0a0a0a] px-3 py-1">
                                                 Featured
                                             </span>
-                                        </button>
+                                        </div>
                                     ) : (
                                         /* Minimal dark banner matching site's black accent */
                                         <div
@@ -181,8 +193,9 @@ export default function Projects() {
                                         <div className="pt-1 flex gap-3">
                                             <a
                                                 href={p.liveUrl || p.github}
+                                                target="_blank"
+                                                rel="noreferrer"
                                                 className="btn-solid text-[10px] flex-1 justify-center"
-                                                download
                                             >
                                                 <FiExternalLink size={12} /> Live Demo
                                             </a>
@@ -237,14 +250,7 @@ export default function Projects() {
                                 </div>
                                 <div className="bg-black">
                                     <div className="relative w-full" style={{ aspectRatio: '16 / 9' }}>
-                                        <video
-                                            src={activeVideo}
-                                            controls
-                                            autoPlay
-                                            muted
-                                            poster={projects.find(p => p.videoUrl === activeVideo)?.thumbnail}
-                                            className="w-full h-full"
-                                        />
+                                        <video src={activeVideo} controls className="w-full h-full" />
                                     </div>
                                 </div>
                             </motion.div>
