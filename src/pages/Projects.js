@@ -9,8 +9,8 @@ const projects = [
         description: 'English-to-Hindi NMT model targeting public legal notices using HuggingFace Transformers and PyTorch. Applied model quantization for edge deployment, improving latency and resource efficiency.',
         tags: ['Python', 'HuggingFace', 'PyTorch', 'TensorFlow', 'Model Quantization'],
         github: 'https://github.com/kapoorbhavya/NMT_Public_Notice_Engllish_To_Hindi_Translator',
-        liveUrl: 'https://github.com/kapoorbhavya/portfolio/raw/main/public/video/Screen%20Recording%202026-03-14%20145340.mp4',
-        
+        liveUrl: 'https://drive.google.com/file/d/1tQtZIRPLl-wTf8CUKgLy6L70RZg5A-8n/preview',
+        videoUrl: 'https://drive.google.com/uc?export=download&id=1tQtZIRPLl-wTf8CUKgLy6L70RZg5A-8n',
         thumbnail: 'images/nmt-thumbnail.png',
         period: 'Oct – Nov 2025', category: 'AI / ML',
     },
@@ -20,7 +20,8 @@ const projects = [
         description: 'Intelligent defect detection for offset printing quality control. Random Forest for classification and Isolation Forest for unsupervised anomaly detection, with heatmap visualization.',
         tags: ['Python', 'OpenCV', 'Scikit-learn', 'Random Forest', 'Isolation Forest'],
         github: 'https://github.com/kapoorbhavya/Printing_defect_detection_Project',
-        liveUrl: 'https://github.com/kapoorbhavya/portfolio/raw/main/public/video/Screen%20Recording%202026-03-14%20161251.mp4',
+        liveUrl: 'https://drive.google.com/file/d/1FZWS_GdFytlI74htDtl4l9p1Ak6mNrKo/preview',
+        videoUrl: 'https://drive.google.com/uc?export=download&id=1FZWS_GdFytlI74htDtl4l9p1Ak6mNrKo',
         thumbnail: 'images/print_defect.png',
         period: 'Oct – Nov 2025', category: 'Computer Vision',
     },
@@ -30,7 +31,8 @@ const projects = [
         description: 'Full-stack MERN platform connecting students with alumni for mentorship and career guidance. JWT role-based auth across Admin, Alumni, and Student roles. GenAI-powered event recommendations.',
         tags: ['React 19', 'Node.js', 'Express.js', 'MongoDB', 'JWT', 'GenAI'],
         github: 'https://github.com/kapoorbhavya/Alumni_Connection_Platform',
-        liveUrl: 'https://github.com/kapoorbhavya/portfolio/raw/main/public/video/alumni_connection_record.mp4',
+        liveUrl: 'https://drive.google.com/file/d/1q9mOaUDE3CL-rUhf0YrJ-iS980-zMk24/preview',
+        videoUrl: 'https://drive.google.com/uc?export=download&id=1q9mOaUDE3CL-rUhf0YrJ-iS980-zMk24',
         thumbnail: 'images/Alumni_connection-thumbnail.png',
         period: 'Jun – Aug 2025', category: 'Full Stack',
     },
@@ -116,6 +118,7 @@ export default function Projects() {
                                                 <div className="w-full" style={{ aspectRatio: '16 / 9' }}>
                                                     <video
                                                         src={p.videoUrl}
+                                                        poster={p.thumbnail}
                                                         className="w-full h-full object-cover opacity-70 group-hover/video:opacity-100 transition-opacity duration-200"
                                                         muted
                                                         playsInline
