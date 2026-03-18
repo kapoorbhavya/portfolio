@@ -13,13 +13,38 @@ const info = [
 export default function Contact() {
     const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
     const [sent, setSent] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+
     const onChange = e => setForm({ ...form, [e.target.name]: e.target.value });
-    const onSubmit = e => {
+
+    const onSubmit = async e => {
         e.preventDefault();
-        // Simulate successful send (no external service)
-        setSent(true);
-        setTimeout(() => setSent(false), 4000);
-        setForm({ name: '', email: '', subject: '', message: '' });
+        setLoading(true);
+        setError('');
+
+        try {
+            const response = await fetch('https://formspree.io/f/mvzwdrdv', {
+                method: 'POST',
+                body: JSON.stringify(form),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                setSent(true);
+                setForm({ name: '', email: '', subject: '', message: '' });
+                setTimeout(() => setSent(false), 4000);
+            } else {
+                setError('Failed to send message. Please try again.');
+            }
+        } catch (err) {
+            setError('Failed to send message. Please check your connection.');
+            console.error('Error:', err);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -85,6 +110,16 @@ export default function Contact() {
                                 <p className="text-xl font-bold text-[#0a0a0a]">Message Sent</p>
                                 <p className="text-sm text-[#777]">I'll get back to you within 24 hours.</p>
                             </motion.div>
+                        ) : error ? (
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="flex flex-col items-center justify-center py-20 gap-4 border border-red-300 bg-red-50 text-center"
+                            >
+                                <p className="text-lg font-bold text-red-600">Error</p>
+                                <p className="text-sm text-red-600">{error}</p>
+                                <button onClick={() => { setError(''); }} className="btn-solid mt-4">Try Again</button>
+                            </motion.div>
                         ) : (
                             <form onSubmit={onSubmit} className="space-y-0">
                                 {[
@@ -106,8 +141,8 @@ export default function Contact() {
                                         className="w-full bg-transparent border-none outline-none text-sm text-[#0a0a0a] placeholder-[#ccc] font-medium resize-none" />
                                 </div>
                                 <div className="pt-6">
-                                    <button type="submit" className="btn-solid flex items-center gap-2">
-                                        <FiSend size={13} /> Send Message
+                                    <button type="submit" disabled={loading} className={`btn-solid flex items-center gap-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                        <FiSend size={13} /> {loading ? 'Sending...' : 'Send Message'}
                                     </button>
                                 </div>
                             </form>
